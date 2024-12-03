@@ -12,8 +12,8 @@ int main() {
     //Vectors to order sets
     std::vector<std::string> strings;
     std::vector<int> left;
-    std::unordered_map<int, int> map_right;
-    
+    std::vector<int> right;
+    std::unordered_map<int, int> dict;
 
     //Opens file and pushes it to strings vector
     if(file.is_open()) {
@@ -37,38 +37,43 @@ int main() {
             if( c != ' ' ) {
                 temp.push_back(c);
                 //If temp is a space or \n and isnt empty, this means you hit the end of the line. 
+                //Push this to the correct array
             }
-            //Push this to the correct array
             if(temp.size() == 5) { 
-                //Stores string as a number
-                int number = std::stoi(std::string(temp.data(), temp.size()));
-                //If first number in line, push to left vector
                 if(count % 2 == 0) {
-                    left.push_back(number); //Adds to vector
-                    temp.clear(); //Clear buffer
-                    count++; //Increment
+                    left.push_back(std::stoi(std::string(temp.data(), temp.size())));\
                 } else {
-                    //If second number in line, adds number to the map
-                    //Checks if the map already contains this number, and if so increments
-                    if(map_right.count(number) > 0) {
-                        map_right.at(number)++;
-                        temp.clear();
-                    } else {
-                        //Otherwise add the value and set value to 1 to start count
-                        map_right.insert({number, 1});
-                        temp.clear(); //Clear buffer
-                    }
-                    count++;
+                    right.push_back(std::stoi(std::string(temp.data(), temp.size())));
                 }
+                temp.clear();
+                count++;
             }
         }
     }
+    
+    bool contains;
+    for(int lNum : left) {
+        count = 0;
+        for(int rNum : right) {
+            if(lNum == rNum) {
+                count++;
+            }
+        }
+        //If count == 0, ignore but if greater, check if already in dict. Adds total occurances of that value in right. Extra finds from left dont matter
+        if(count > 0 && dict.count(lNum) == 0) {
+            dict.insert({lNum, count});
+        }
+    }
+
     count = 0;
-
-
-    for(auto key : map_right) {
-        std::cout << key.first << ' ' << key.second << std::endl;
-        count+= abs(key.second * key.first);
+    //Loops through left, every time its found multiply the value by the occurances at the value
+    for(int num : left) {
+        //Catches not found errors in dict by ignoring them
+        try {
+            count += (dict.at(num) * num);
+        } catch(const std::out_of_range& e) {
+            continue;
+        }
     }
     std::cout << count;
     return 0;
