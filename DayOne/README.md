@@ -1,4 +1,5 @@
 # AoC2024
+```
 Day one COMPLETE
 Day two
 Day three
@@ -24,3 +25,4 @@ Day twentytwo
 Day twentythree
 Day twentyfour
 Day twentyfive
+```
