@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 
-bool testVec(std::vector<int>);
+static bool testVec(std::vector<int>, std::vector<std::vector<int>>);
 
 int main() {
     //Opens file stream, this is declaration and instantiationo
@@ -46,7 +46,7 @@ int main() {
         reports.push_back(std::stoi(std::string(temp.data(), temp.size())));
         temp.clear();
     
-        if(testVec(reports)) {
+        if(testVec(reports, failed)) {
             count++;
         }
         //Clear buffer
@@ -56,7 +56,7 @@ int main() {
     return 0;
 }
 
-bool testVec(std::vector<int> test) {
+static bool testVec(std::vector<int> test, std::vector<std::vector<int>> failed) {
     bool flag;
     for(int each = 0; each < test.size(); each++) {
         flag = false;
@@ -77,13 +77,18 @@ bool testVec(std::vector<int> test) {
                 //Checks if each number change is within bounds(At least 1, At most 3)
                 if(!(abs >= 1 && abs <= 3)) {
                     flag = true;
+                    test.erase(test.begin() + i);
+                    break;
                 //Checks that trend never changed
                 } else if( adding != tracking ){
                     flag = true;
+                    test.erase(test.begin() + i);
+                    break;
                 }
             }
             tracking = adding;
         }
+        failed.push_back(test);
     }
     return !flag;
 }
