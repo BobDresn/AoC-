@@ -1,6 +1,6 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/bobdresner/Desktop/C++/AoC++/DaytwoCode/DayTwo'
+binary-path:     '/Users/bobdresner/Desktop/C++/AoC++/DayTwo/DayTwo'
 relocations:
   - { offsetInCU: 0x80C9, offset: 0x80C9, size: 0x8, addend: 0x0, symName: __ZNSt3__124__put_character_sequenceB8ue170006IcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_m, symObjAddr: 0x47B4, symBinAddr: 0x100008378, symSize: 0x1EC }
   - { offsetInCU: 0xAA30, offset: 0xAA30, size: 0x8, addend: 0x0, symName: __ZNSt3__17getlineB8ue170006IcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_13basic_istreamIT_T0_EES9_RNS_12basic_stringIS6_S7_T1_EE, symObjAddr: 0x89C, symBinAddr: 0x100004460, symSize: 0x5C }
