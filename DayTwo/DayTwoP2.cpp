@@ -2,7 +2,6 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include <cmath>
 
 bool isSafe(std::vector<int>& report) {
     bool safe = true;
