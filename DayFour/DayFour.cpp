@@ -3,104 +3,82 @@
 #include <vector>
 #include <string>
 
-int checkAllDirections(std::vector<std::string> map, int row, int column) {
-    int found = 0;
-    bool flag = false;;
-    std::string goal = "XMAS";
-    for(int i = 0; i < 8; i++) {
-        switch (i) {
-            case 0:
-                //N
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row - 3 < 0 || map[row - j][column] != goal[j]) {
-                        flag = true;
-                    }
+enum Direction 
+{
+    N = 0,
+    S = 1,
+    E = 2,
+    W = 3,
+    NE = 4,
+    SE = 5,
+    NW = 6,
+    SW = 7
+};
+
+std::string xmas = "XMAS";
+
+bool checkNextChar(std::vector<std::string> map, int i, int j, char goal, Direction dir) 
+{
+    bool flag = false;
+    switch(dir) {
+        case Direction::N:
+            if(i - 1 >= 0) {
+                if(map[i - 1][j] == goal) {
+                    flag = true;
                 }
-                if(!flag) {
-                    found++;
+            }
+        case Direction::S:
+            if(i + 1 < map.size()) {
+                if(map[i + 1][j] == goal) {
+                    flag = true;
                 }
-            case 1:
-                //NE
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row - 3 < 0 || column + 3 >= map[row].size() || map[row - j][column + j] != goal[j]){
-                        flag = true;
-                    }
+            }
+        case Direction::E:
+            if(j + 1 < map[i].size()) {
+                if(map[i][j + 1] == goal) {
+                    flag = true;
                 }
-                if(!flag) {
-                    found++;
+            }
+        case Direction::W:
+            if(j - 1 >= 0) {
+                if(map[i][j - 1] == goal) {
+                    flag = true;
                 }
-            case 2:
-                //E
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(column + 3 >= map[row].size() || map[row][column + j] != goal[j]){
-                        flag = true;
-                    }
+            }
+        case Direction::NE:
+            if(i - 1 >= 0 && j + 1 < map[i].size()) {
+                if(map[i - 1][j + 1] == goal) {
+                    flag = true;
                 }
-                if(!flag) {
-                    found++;
+            }
+        case Direction::SE:
+            if(i + 1 < map.size() && j + 1 < map[i].size()) {
+                if(map[i + 1][j + 1] == goal) {
+                    flag = true;
                 }
-            case 3:
-                //SE
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row + 3 >= map.size() || column + 3 >= map[row].size() || map[row + j][column + j] != goal[j]){
-                        flag = true;
-                    }
+            }
+        case Direction::NW:
+            if(i - 1 >= 0 && j - 1 >= 0) {
+                if(map[i - 1][j - 1] == goal) {
+                    flag = true;
                 }
-                if(!flag) {
-                    found++;
+            }
+        case Direction::SW:
+            if(i + 1 < map.size() && j - 1 >= 0) {
+                if(map[i + 1][j - 1] == goal) {
+                    flag = true;
                 }
-            case 4:
-                //S
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row + 3 >= map.size() || map[row + j][column] != goal[j]){
-                        flag = true;
-                    }
-                }
-                if(!flag) {
-                    found++;
-                }
-            case 5:
-                //SW
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row + 3 >= map.size() || column - 3 < 0 || map[row + j][column - j] != goal[j]){
-                        flag = true;
-                    }
-                }
-                if(!flag) {
-                    found++;
-                }
-            case 6:
-                //W
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(column - 3 < 0 || map[row][column - j] != goal[j]){
-                        flag = true;
-                    }
-                }
-                if(!flag) {
-                    found++;
-                }
-            case 7:
-                //NW
-                flag = false;
-                for(int j = 0; j < 4; j++) {
-                    if(row - 3 < 0 || column - 3 < 0 || map[row - j][column - j] != goal[j]){
-                        flag = true;
-                    }
-                }
-                if(!flag) {
-                    found++;
-                }
-        }
+            }
     }
-    return found;
+    return flag;
 }
+
+int countAllPossible(std::vector<std::string> map, int i, int j) {
+    for(int y = 0; y < 8; y++) {
+
+    }
+}
+
 
 int main() {
     //Opens file
@@ -124,12 +102,17 @@ int main() {
     int count = 0;
 
     for(int i = 0; i < map.size(); i++) {
+        for(int j = 0; j < map[0].size(); j++) {
+        }
+    }
+    for(int i = 0; i < map.size(); i++) {
         for(int j = 0; j < map[i].size(); j++) {
             if(map[i][j] == 'X') {
-                count += checkAllDirections(map, i, j);
             }
         }
     }
+
+
     std::cout << count;
     return count;
 }
