@@ -8,10 +8,10 @@ int searchWord(std::vector<std::string> map, int x, int y, std::string word)
 {
     int num = 0;
     //Horizontal
-    if(x + word.length() <= map[0].size())
+    if(y + word.length() <= map.size())
     {
         int i = 0;
-        while(i < word.length() && map[x][y] == word[i])
+        while(i < word.length() && map[x][y + i] == word[i])
         {
             i++;
         }
@@ -22,10 +22,10 @@ int searchWord(std::vector<std::string> map, int x, int y, std::string word)
     }
 
     //Vertical 
-    if(y + word.length() <= map.size())
+    if(x + word.length() <= map[0].size())
     {
         int i = 0;
-        while(i < word.length() && map[y + i][x] == word[i])
+        while(i < word.length() && map[x + i][y] == word[i])
         {
             i++;
         }
